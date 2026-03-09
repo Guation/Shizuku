@@ -107,8 +107,11 @@ v_current = (uintptr_t) v + v_size - sizeof(char *); \
     ARG_END(argv)
 
     LOGD("exec app_process");
-
+    for (int i = 0; argv[i] != nullptr; i++) {
+        LOGD("argv[%d] = %s", i, argv[i]);
+    }
     if (execvp((const char *) argv[0], argv)) {
+        PLOGE("execvp %s", argv[0]);
         exit(EXIT_FATAL_APP_PROCESS);
     }
 }
